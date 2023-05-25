@@ -27,3 +27,22 @@ linter:
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+# dart code metric
+dart_code_metrics:
+  metrics:
+    number-of-parameters: 4
+    maximum-nesting-level: 2
+  metrics-exclude:
+    - test/**
+    - pubspec.yaml
+  rules:
+    - newline-before-return
+    - no-empty-block
+    - prefer-trailing-comma
+    - no-equal-then-else
+    - prefer-conditional-expressions
