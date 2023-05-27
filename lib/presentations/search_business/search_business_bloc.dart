@@ -52,7 +52,11 @@ class SearchBusinessBloc
           final result = _items
               .where((company) => company.name.contains(event.text))
               .toList();
-          emit(SearchBusinessByName(result));
+          if (result.isNotEmpty) {
+            emit(SearchBusinessSuccess(result));
+          } else {
+            emit(const SearchBusinessEmpty());
+          }
         }
       },
       transformer: (events, mapper) => events.debounceTime(
@@ -74,7 +78,7 @@ class SearchBusinessBloc
             _items.addAll(result);
             emit(SearchBusinessSuccess(_items));
           } else {
-            emit(const SearchBusinessLoading());
+            emit(const SearchBusinessEmpty(isFromServer: true));
           }
         }
       } catch (e) {
