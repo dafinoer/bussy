@@ -39,6 +39,8 @@ dart_code_metrics:
     maximum-nesting-level: 2
   metrics-exclude:
     - test/**
+    - "**/*.g.dart"
+    - "**/*.config.dart"
     - pubspec.yaml
   rules:
     - newline-before-return
