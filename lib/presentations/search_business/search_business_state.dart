@@ -18,6 +18,15 @@ class SearchBusinessLoading extends SearchBusinessState {
   List<Object?> get props => [];
 }
 
+class SearchBusinessByName extends SearchBusinessState {
+  final List<CompanyModel> companies;
+
+  const SearchBusinessByName(this.companies);
+
+  @override
+  List<Object?> get props => [companies];
+}
+
 class SearchBusinessSuccess extends SearchBusinessState {
   final List<CompanyModel> companies;
 
@@ -29,6 +38,7 @@ class SearchBusinessSuccess extends SearchBusinessState {
 
 class SearchBusinessEmpty extends SearchBusinessState {
   const SearchBusinessEmpty();
+
   @override
   List<Object?> get props => [];
 }

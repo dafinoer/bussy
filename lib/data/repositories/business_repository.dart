@@ -8,4 +8,11 @@ abstract class BusinessRepository {
     int offset = 0,
     int limit = 25,
   });
+
+  Future<List<CompanyModel>> searchByLocation(
+    double lat,
+    double lon, {
+    int offset = 0,
+    int limit = 25,
+  });
 }

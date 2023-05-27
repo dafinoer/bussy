@@ -10,8 +10,11 @@ import '../../data/remote/businesses_client.dart';
 @Injectable(as: BusinessRepository)
 class BusinessRepositoryImpl implements BusinessRepository {
   final BusinessesClient businessesClient;
+  late String _token;
 
-  BusinessRepositoryImpl(this.businessesClient);
+  BusinessRepositoryImpl(this.businessesClient) {
+    _token = 'Bearer ${dotenv.get('APIKEY')}';
+  }
 
   @override
   Future<List<CompanyModel>> search(
@@ -24,8 +27,28 @@ class BusinessRepositoryImpl implements BusinessRepository {
       offset,
       limit,
     );
-    final apiToken = 'Bearer ${dotenv.get('APIKEY')}';
-    final result = await businessesClient.search(apiToken, searchQuery.toJson);
+    final result = await businessesClient.search(_token, searchQuery.toJson);
+    final toCompanyModel = result.businessCompanies
+        .map((e) => e.toCompany())
+        .toList(growable: false);
+
+    return toCompanyModel;
+  }
+
+  @override
+  Future<List<CompanyModel>> searchByLocation(
+    double lat,
+    double lon, {
+    int offset = 0,
+    int limit = 25,
+  }) async {
+    final result = await businessesClient.searchCompanyByLocation(
+      _token,
+      lat,
+      lon,
+      offset,
+      limit,
+    );
     final toCompanyModel = result.businessCompanies
         .map((e) => e.toCompany())
         .toList(growable: false);

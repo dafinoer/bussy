@@ -13,15 +13,24 @@ class SearchByText extends SearchBusinessEvent {
   List<Object?> get props => [text];
 }
 
-class SearchToServer extends SearchBusinessEvent {
-  final double? lat;
-  final double? lon;
+class SearchByLocation extends SearchBusinessEvent {
+  final double lat;
+  final double lon;
 
-  const SearchToServer({
-    this.lat,
-    this.lon,
+  const SearchByLocation({
+    required this.lat,
+    required this.lon,
   });
 
   @override
   List<Object?> get props => [lat, lon];
+}
+
+class PagingSearchCompanies extends SearchBusinessEvent {
+  const PagingSearchCompanies(this.searchModel);
+
+  final SearchModel searchModel;
+
+  @override
+  List<Object?> get props => [searchModel];
 }

@@ -15,4 +15,13 @@ abstract class BusinessesClient {
     @Header('Authorization') String authToken,
     @Queries() Map<String, dynamic> queries,
   );
+
+  @GET(Endpoints.search)
+  Future<CompanySearchRemoteModel> searchCompanyByLocation(
+    @Header('Authorization') String authToken,
+    @Query('latitude') double lat,
+    @Query('longitude') double lon,
+    @Query('offset') int offset,
+    @Query('limit') int limit,
+  );
 }

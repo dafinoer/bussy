@@ -46,6 +46,41 @@ class _BusinessesClient implements BusinessesClient {
     return value;
   }
 
+  @override
+  Future<CompanySearchRemoteModel> searchCompanyByLocation(
+    String authToken,
+    double lat,
+    double lon,
+    int offset,
+    int limit,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'latitude': lat,
+      r'longitude': lon,
+      r'offset': offset,
+      r'limit': limit,
+    };
+    final _headers = <String, dynamic>{r'Authorization': authToken};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CompanySearchRemoteModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/businesses/search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CompanySearchRemoteModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
