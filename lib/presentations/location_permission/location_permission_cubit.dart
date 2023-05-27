@@ -15,7 +15,7 @@ class LocationPermissionCubit extends Cubit<LocationPermissionState> {
   ) : super(const LocationPermissionInitial());
 
   factory LocationPermissionCubit.create() =>
-      LocationPermissionCubit(getIt.get())..onRequestLocation();
+      LocationPermissionCubit(getIt.get());
 
   void onRequestLocation() async {
     try {

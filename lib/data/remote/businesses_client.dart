@@ -12,6 +12,7 @@ abstract class BusinessesClient {
 
   @GET(Endpoints.search)
   Future<CompanySearchRemoteModel> search(
+    @Header('Authorization') String authToken,
     @Queries() Map<String, dynamic> queries,
   );
 }

@@ -1,3 +1,4 @@
+import 'package:bussy/domains/model/search_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'queries_search_model.g.dart';
@@ -39,6 +40,22 @@ class QueriesSearchModel {
     this.limit = 20,
     this.offset = 0,
   });
+
+  factory QueriesSearchModel.fromSearchModel(
+    SearchModel searchModel,
+    int offset,
+    int limit,
+  ) {
+    return QueriesSearchModel(
+      lat: searchModel.lat,
+      lon: searchModel.lon,
+      searchText: searchModel.searchText,
+      price: searchModel.prices,
+      categories: searchModel.categories,
+      offset: offset,
+      limit: limit,
+    );
+  }
 
   Map<String, dynamic> get toJson => _$QueriesSearchModelToJson(this);
 }

@@ -3,8 +3,13 @@ import 'package:equatable/equatable.dart';
 class LocationModel extends Equatable {
   final double lat;
   final double lon;
+  final String? address;
 
-  const LocationModel({required this.lat, required this.lon});
+  const LocationModel({
+    required this.lat,
+    required this.lon,
+    this.address,
+  });
 
   factory LocationModel.defaultLocation() => const LocationModel(
         lat: 40.72415942476694,
@@ -12,5 +17,9 @@ class LocationModel extends Equatable {
       );
 
   @override
-  List<Object?> get props => [lat, lon];
+  List<Object?> get props => [
+        lat,
+        lon,
+        address,
+      ];
 }

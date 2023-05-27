@@ -1,11 +1,9 @@
 import 'package:bussy/components/endpoints.dart';
-import 'package:bussy/injector/main_injector.dart';
 import 'package:dio/dio.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-import '../data/interceptor/api_token_interceptor.dart';
+import '../data/remote/businesses_client.dart';
 
 final dioService = Dio(
   BaseOptions(
@@ -16,13 +14,7 @@ final dioService = Dio(
 
 @module
 abstract class NetworkModule {
-  Dio get dio {
-    final dio = dioService;
-    dio.interceptors.addAll([
-      PrettyDioLogger(),
-      ApiTokenInterceptor(getIt.get()),
-    ]);
+  Dio get dio => dioService..interceptors.addAll([PrettyDioLogger()]);
 
-    return dio;
-  }
+  BusinessesClient get businessClient => BusinessesClient(dio);
 }

@@ -1,3 +1,5 @@
+import 'package:bussy/injector/main_injector.dart';
+import 'package:bussy/presentations/search_business/search_business_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,11 +17,27 @@ class HomeScreenPage extends StatefulWidget {
 }
 
 class _HomeScreenPageState extends State<HomeScreenPage> {
+  late final LocationPermissionCubit locationPermissionCubit;
+  late final SearchBusinessBloc searchBusinessBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    locationPermissionCubit = LocationPermissionCubit.create();
+    searchBusinessBloc = SearchBusinessBloc(getIt.get());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    locationPermissionCubit.onRequestLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LocationPermissionCubit.create()),
+        BlocProvider.value(value: locationPermissionCubit),
       ],
       child: Scaffold(
         appBar: AppBar(

@@ -1,3 +1,5 @@
+import 'package:bussy/domains/model/company_model.dart';
+import 'package:bussy/domains/model/location_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'coordinate_remote_model.dart';
@@ -10,13 +12,16 @@ class CompanyRemoteModel {
   final String id;
   final String name;
   final String imageUrl;
+  final String phone;
+  final String? displayPhone;
+
   @JsonKey(defaultValue: false)
-  final bool isClose;
+  final bool isClosed;
 
   final String price;
 
-  @JsonKey(defaultValue: 0)
-  final int rating;
+  @JsonKey(defaultValue: 0.0)
+  final double rating;
 
   @JsonKey(defaultValue: 0)
   final int ratingCount;
@@ -31,7 +36,9 @@ class CompanyRemoteModel {
     required this.id,
     required this.name,
     required this.imageUrl,
-    this.isClose = false,
+    required this.phone,
+    this.displayPhone,
+    this.isClosed = false,
     required this.price,
     required this.rating,
     required this.ratingCount,
@@ -41,4 +48,21 @@ class CompanyRemoteModel {
 
   factory CompanyRemoteModel.fromJson(Map<String, dynamic> json) =>
       _$CompanyRemoteModelFromJson(json);
+
+  CompanyModel toCompany() => CompanyModel(
+        id: id,
+        name: name,
+        phone: phone,
+        displayPhone: displayPhone,
+        priceSymbol: price,
+        locationModel: LocationModel(
+          lat: coordinateRemoteModel.lat,
+          lon: coordinateRemoteModel.lon,
+          address: locationRemoteModel.displayAddress.join(' '),
+        ),
+        imageCoverCompany: imageUrl,
+        isClose: isClosed,
+        rating: rating,
+        reviewCount: ratingCount,
+      );
 }

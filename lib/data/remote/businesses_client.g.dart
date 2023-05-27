@@ -19,11 +19,15 @@ class _BusinessesClient implements BusinessesClient {
   String? baseUrl;
 
   @override
-  Future<CompanySearchRemoteModel> search(Map<String, dynamic> queries) async {
+  Future<CompanySearchRemoteModel> search(
+    String authToken,
+    Map<String, dynamic> queries,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queries);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': authToken};
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CompanySearchRemoteModel>(Options(

@@ -4,11 +4,11 @@ import 'package:bussy/themes/dark_theme.dart';
 import 'package:bussy/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  await configureDependencies();
+  await dotenv.load(fileName: "assets/.env");
+  configureDependencies();
   runApp(const MyApp());
 }
 
