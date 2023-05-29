@@ -55,4 +55,11 @@ class BusinessRepositoryImpl implements BusinessRepository {
 
     return toCompanyModel;
   }
+
+  @override
+  Future<CompanyModel> getCompanyById(String id) async {
+    final response = await businessesClient.companyById(_token, id);
+
+    return response.toCompany();
+  }
 }

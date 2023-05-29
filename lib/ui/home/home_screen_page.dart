@@ -2,6 +2,7 @@ import 'package:bussy/injector/main_injector.dart';
 import 'package:bussy/presentations/search_business/search_business_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../presentations/location_permission/location_permission_cubit.dart';
@@ -71,7 +72,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           title: const Text("Bussy"),
           leadingWidth: 0.0,
           bottom: const PreferredSize(
-            preferredSize: Size(double.infinity, 36.0),
+            preferredSize: Size(double.infinity, kToolbarHeight),
             child: _AppBarContent(),
           ),
           actions: [
@@ -129,6 +130,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
               if (state is SearchBusinessSuccess) {
                 return ListView.builder(
+                  padding: EdgeInsets.zero,
                   controller: scrollController,
                   itemCount: state.companies.length,
                   itemBuilder: (context, index) {
@@ -137,6 +139,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                       subtitle:
                           state.companies[index].locationModel.address ?? '',
                       urlImage: state.companies[index].imageCoverCompany ?? '',
+                      onTap: () =>
+                          context.push('/detail/${state.companies[index].id}'),
                     );
                   },
                 );

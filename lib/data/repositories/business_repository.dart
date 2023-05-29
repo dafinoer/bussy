@@ -15,4 +15,6 @@ abstract class BusinessRepository {
     int offset = 0,
     int limit = 25,
   });
+
+  Future<CompanyModel> getCompanyById(String id);
 }

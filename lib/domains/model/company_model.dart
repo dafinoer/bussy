@@ -14,6 +14,7 @@ class CompanyModel extends Equatable {
   final String? imageCoverCompany;
   final int reviewCount;
   final List<CategoryModel> categories;
+  final List<String> photos;
   final String? displayPhone;
 
   const CompanyModel({
@@ -28,6 +29,7 @@ class CompanyModel extends Equatable {
     this.reviewCount = 0,
     this.categories = const <CategoryModel>[],
     this.displayPhone,
+    required this.photos,
   });
 
   @override
@@ -42,5 +44,6 @@ class CompanyModel extends Equatable {
         imageCoverCompany,
         reviewCount,
         displayPhone,
+        photos,
       ];
 }

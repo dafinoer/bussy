@@ -4,6 +4,8 @@ import 'package:bussy/ui/home/home_screen_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
+import '../ui/detail/detail_screen_page.dart';
+
 final route = GoRouter(
   initialLocation: HomeScreenPage.route,
   debugLogDiagnostics: kDebugMode,
@@ -20,6 +22,11 @@ final route = GoRouter(
 
         return FilterScreenPage(filters: filter);
       },
+    ),
+    GoRoute(
+      path: '${DetailScreenPage.route}/:userId',
+      builder: (context, state) =>
+          DetailScreenPage(id: state.pathParameters['userId']!),
     ),
   ],
 );

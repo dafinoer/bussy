@@ -3,4 +3,8 @@ class Endpoints {
 
   // Business
   static const String search = '/businesses/search';
+  static const String businessById = '/businesses';
+
+  //reviews
+  static const String reviews = '/businesses/{businessID}/reviews';
 }

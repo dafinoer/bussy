@@ -21,4 +21,8 @@ CompanyRemoteModel _$CompanyRemoteModelFromJson(Map<String, dynamic> json) =>
           json['coordinates'] as Map<String, dynamic>),
       locationRemoteModel: LocationRemoteModel.fromJson(
           json['location'] as Map<String, dynamic>),
+      photos: (json['photos'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );

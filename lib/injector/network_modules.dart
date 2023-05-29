@@ -1,4 +1,5 @@
 import 'package:bussy/components/endpoints.dart';
+import 'package:bussy/data/remote/reviews_client.dart';
 import 'package:dio/dio.dart';
 
 import 'package:injectable/injectable.dart';
@@ -17,4 +18,6 @@ abstract class NetworkModule {
   Dio get dio => dioService..interceptors.addAll([PrettyDioLogger()]);
 
   BusinessesClient get businessClient => BusinessesClient(dio);
+
+  ReviewsClient get reviewsClient => ReviewsClient(dio);
 }

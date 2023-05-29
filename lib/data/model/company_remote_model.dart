@@ -26,6 +26,9 @@ class CompanyRemoteModel {
   @JsonKey(defaultValue: 0)
   final int ratingCount;
 
+  @JsonKey(defaultValue: <String>[])
+  final List<String> photos;
+
   @JsonKey(name: 'coordinates')
   final CoordinateRemoteModel coordinateRemoteModel;
 
@@ -44,6 +47,7 @@ class CompanyRemoteModel {
     required this.ratingCount,
     required this.coordinateRemoteModel,
     required this.locationRemoteModel,
+    required this.photos,
   });
 
   factory CompanyRemoteModel.fromJson(Map<String, dynamic> json) =>
@@ -64,5 +68,6 @@ class CompanyRemoteModel {
         isClose: isClosed,
         rating: rating,
         reviewCount: ratingCount,
+        photos: photos,
       );
 }

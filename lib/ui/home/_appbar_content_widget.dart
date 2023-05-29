@@ -8,7 +8,7 @@ class _AppBarContent extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
         child: GestureDetector(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
