@@ -7,14 +7,16 @@ abstract class SearchBusinessEvent extends Equatable {
 class SearchByLocation extends SearchBusinessEvent {
   final double lat;
   final double lon;
+  final bool isPaging;
 
   const SearchByLocation({
     required this.lat,
     required this.lon,
+    this.isPaging = false,
   });
 
   @override
-  List<Object?> get props => [lat, lon];
+  List<Object?> get props => [lat, lon, isPaging];
 }
 
 class SearchCompanies extends SearchBusinessEvent {

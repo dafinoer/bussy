@@ -12,12 +12,12 @@ class SearchBusinessInitial extends SearchBusinessState {
 }
 
 class SearchBusinessLoading extends SearchBusinessState {
-  const SearchBusinessLoading({this.explicitLoading = true});
+  const SearchBusinessLoading({this.isPagingLoading = false});
 
-  final bool explicitLoading;
+  final bool isPagingLoading;
 
   @override
-  List<Object?> get props => [explicitLoading];
+  List<Object?> get props => [isPagingLoading];
 }
 
 class SearchBusinessSuccess extends SearchBusinessState {

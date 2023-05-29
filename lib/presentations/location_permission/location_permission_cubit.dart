@@ -19,6 +19,10 @@ class LocationPermissionCubit extends Cubit<LocationPermissionState> {
   factory LocationPermissionCubit.create() =>
       LocationPermissionCubit(getIt.get());
 
+  double get lat => _lat;
+
+  double get lon => _lon;
+
   void onRequestLocation() async {
     try {
       emit(const LocationPermissionSyncProcess());
