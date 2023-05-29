@@ -1,6 +1,8 @@
 # bussy
 
-A simple project where i used the latest material design(Material3) with the Flutter.
+A simple project where i used the latest material design(Material3) with the Flutter. Here i don't
+use a structure that's to clean, because it's just a simple project, but i always try to keep the
+clean code.
 
 ## Getting Started
 
