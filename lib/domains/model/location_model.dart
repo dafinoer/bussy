@@ -11,11 +11,6 @@ class LocationModel extends Equatable {
     this.address,
   });
 
-  factory LocationModel.defaultLocation() => const LocationModel(
-        lat: 40.72415942476694,
-        lon: -73.9926892922817,
-      );
-
   @override
   List<Object?> get props => [
         lat,

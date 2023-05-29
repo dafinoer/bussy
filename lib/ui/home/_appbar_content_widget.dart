@@ -22,7 +22,7 @@ class _AppBarContent extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _LocationText(),
                     Icon(
@@ -50,7 +50,7 @@ class _LocationText extends StatelessWidget {
         if (state is LocationPermissionSuccess) {
           context
               .read<LocationPermissionCubit>()
-              .addressLocation(state.locationModel);
+              .addressLocation(state.lat, state.lon);
         }
       },
       builder: (context, state) {
@@ -64,6 +64,25 @@ class _LocationText extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+            ),
+          );
+        }
+        if (state is LocationPermissionSyncProcess ||
+            state is LocationPermissionSyncProcess) {
+          return SizedBox(
+            width: 100.0,
+            height: 16.0,
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey,
+              highlightColor: Colors.grey[350]!,
+              child: Container(
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+              ),
             ),
           );
         }

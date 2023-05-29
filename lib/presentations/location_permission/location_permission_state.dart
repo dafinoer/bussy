@@ -26,12 +26,13 @@ class LocationPermissionSyncProcess extends LocationPermissionState {
 }
 
 class LocationPermissionSuccess extends LocationPermissionState {
-  const LocationPermissionSuccess(this.locationModel);
+  const LocationPermissionSuccess(this.lat, this.lon);
 
-  final LocationModel locationModel;
+  final double lat;
+  final double lon;
 
   @override
-  List<Object?> get props => [locationModel];
+  List<Object?> get props => [lat, lon];
 }
 
 class LocationPermissionAddress extends LocationPermissionState {

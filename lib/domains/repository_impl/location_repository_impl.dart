@@ -35,11 +35,8 @@ class LocationRepositoryImpl implements LocationRepository {
   }
 
   @override
-  Future<String?> convertLatLonToHumanize(LocationModel locationModel) async {
-    final locations = await placemarkFromCoordinates(
-      locationModel.lat,
-      locationModel.lon,
-    );
+  Future<String?> convertLatLonToHumanize(double lat, double lon) async {
+    final locations = await placemarkFromCoordinates(lat, lon);
 
     return locations.first.thoroughfare;
   }

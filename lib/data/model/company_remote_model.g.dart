@@ -14,7 +14,7 @@ CompanyRemoteModel _$CompanyRemoteModelFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as String,
       displayPhone: json['display_phone'] as String?,
       isClosed: json['is_closed'] as bool? ?? false,
-      price: json['price'] as String,
+      price: json['price'] as String?,
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
       ratingCount: json['rating_count'] as int? ?? 0,
       coordinateRemoteModel: CoordinateRemoteModel.fromJson(

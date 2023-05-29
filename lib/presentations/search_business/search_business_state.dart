@@ -12,10 +12,12 @@ class SearchBusinessInitial extends SearchBusinessState {
 }
 
 class SearchBusinessLoading extends SearchBusinessState {
-  const SearchBusinessLoading();
+  const SearchBusinessLoading({this.explicitLoading = true});
+
+  final bool explicitLoading;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [explicitLoading];
 }
 
 class SearchBusinessSuccess extends SearchBusinessState {
@@ -25,15 +27,6 @@ class SearchBusinessSuccess extends SearchBusinessState {
 
   @override
   List<Object?> get props => [companies];
-}
-
-class SearchBusinessEmpty extends SearchBusinessState {
-  const SearchBusinessEmpty({this.isFromServer = false});
-
-  final bool isFromServer;
-
-  @override
-  List<Object?> get props => [];
 }
 
 class SearchBusinessFailure extends SearchBusinessState {

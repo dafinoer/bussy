@@ -18,7 +18,7 @@ class CompanyRemoteModel {
   @JsonKey(defaultValue: false)
   final bool isClosed;
 
-  final String price;
+  final String? price;
 
   @JsonKey(defaultValue: 0.0)
   final double rating;

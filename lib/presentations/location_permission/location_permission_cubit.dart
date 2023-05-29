@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:bussy/domains/model/location_model.dart';
 import 'package:bussy/injector/main_injector.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,6 +8,9 @@ part 'location_permission_state.dart';
 
 class LocationPermissionCubit extends Cubit<LocationPermissionState> {
   final LocationRepository locationRepository;
+
+  static const _lat = 37.42223598456423;
+  static const _lon = -122.0841004320195;
 
   LocationPermissionCubit(
     this.locationRepository,
@@ -24,23 +26,27 @@ class LocationPermissionCubit extends Cubit<LocationPermissionState> {
           await locationRepository.checkPermissionLocation();
       if (isAllowPermission) {
         final currentLocation = await locationRepository.getCurrentLocation();
-        emit(LocationPermissionSuccess(LocationModel(
-          lat: currentLocation.lat,
-          lon: currentLocation.lon,
-        )));
+        emit(
+          LocationPermissionSuccess(
+            currentLocation.lat,
+            currentLocation.lon,
+          ),
+        );
       } else {
-        emit(LocationPermissionSuccess(LocationModel.defaultLocation()));
+        emit(const LocationPermissionSuccess(_lat, _lon));
       }
     } catch (e) {
       emit(const LocationPermissionDefaultError());
     }
   }
 
-  void addressLocation(LocationModel locationModel) async {
+  void addressLocation(double lat, double lon) async {
     try {
       emit(const LocationPermissionConvertProcessAddress());
-      final address =
-          await locationRepository.convertLatLonToHumanize(locationModel);
+      final address = await locationRepository.convertLatLonToHumanize(
+        lat,
+        lon,
+      );
       emit(LocationPermissionAddress(address));
     } catch (e) {
       emit(const LocationPermissionFailureAddress());

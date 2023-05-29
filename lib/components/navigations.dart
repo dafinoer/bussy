@@ -1,32 +1,25 @@
+import 'package:bussy/domains/model/filter_model.dart';
+import 'package:bussy/ui/filter/filter_screen_page.dart';
 import 'package:bussy/ui/home/home_screen_page.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
-import '../ui/root/root_screen_page.dart';
-import '../ui/search/search_screen_page.dart';
-
-final GlobalKey<NavigatorState> _rootNavKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> _shellNavKey = GlobalKey<NavigatorState>();
-
 final route = GoRouter(
-  navigatorKey: _rootNavKey,
   initialLocation: HomeScreenPage.route,
+  debugLogDiagnostics: kDebugMode,
   routes: [
-    ShellRoute(
-      navigatorKey: _shellNavKey,
-      builder: (context, state, child) {
-        return RootScreenPage(child: child);
+    GoRoute(
+      path: HomeScreenPage.route,
+      pageBuilder: (context, state) =>
+          const NoTransitionPage(child: HomeScreenPage()),
+    ),
+    GoRoute(
+      path: '/filter',
+      builder: (context, state) {
+        final filter = state.extra as Map<String, FilterModel>?;
+
+        return FilterScreenPage(filters: filter);
       },
-      routes: [
-        GoRoute(
-          path: HomeScreenPage.route,
-          pageBuilder: (context, state) => const NoTransitionPage(child: HomeScreenPage()),
-        ),
-        GoRoute(
-          path: SearchScreenPage.route,
-          pageBuilder: (context, state) => const NoTransitionPage(child: SearchScreenPage()),
-        ),
-      ],
     ),
   ],
 );

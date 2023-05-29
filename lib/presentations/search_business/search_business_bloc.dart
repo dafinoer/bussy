@@ -14,9 +14,15 @@ part 'search_business_state.dart';
 class SearchBusinessBloc
     extends Bloc<SearchBusinessEvent, SearchBusinessState> {
   final BusinessRepository businessRepository;
-  final List<CompanyModel> _items = List.empty();
+  final List<CompanyModel> _items = <CompanyModel>[];
   final int _limit = 15;
+
   bool _isFullLoad = false;
+
+  set setIsFullLoad(bool isFullLoad) => _isFullLoad = isFullLoad;
+
+  bool get isFullLoad => _isFullLoad;
+
   int _indexLatestLoad = 0;
 
   factory SearchBusinessBloc.create() => SearchBusinessBloc(getIt.get());
@@ -41,50 +47,24 @@ class SearchBusinessBloc
       },
       transformer: (events, mapper) => events.switchMap(mapper),
     );
-    on<SearchByText>(
-      (event, emit) {
+    on<SearchCompanies>(
+      (event, emit) async {
         emit(const SearchBusinessLoading());
-        if (event.text.isEmpty && _items.isEmpty) {
-          emit(const SearchBusinessEmpty());
-        } else if (event.text.isEmpty) {
-          emit(SearchBusinessSuccess(_items));
-        } else {
-          final result = _items
-              .where((company) => company.name.contains(event.text))
-              .toList();
-          if (result.isNotEmpty) {
-            emit(SearchBusinessSuccess(result));
-          } else {
-            emit(const SearchBusinessEmpty());
-          }
-        }
+        final result = await businessRepository.search(
+          event.searchModel,
+          offset: _indexLatestLoad,
+          limit: _limit,
+        );
+        _items.addAll(result);
+        emit(SearchBusinessSuccess(result));
       },
-      transformer: (events, mapper) => events.debounceTime(
-        const Duration(milliseconds: 500),
-      ),
+      transformer: (events, mapper) => events
+          .where((event) =>
+              event.searchModel.searchText != null &&
+              (event.searchModel.searchText?.isNotEmpty ?? false))
+          .debounceTime(const Duration(milliseconds: 500))
+          .switchMap(mapper),
     );
-
-    on<PagingSearchCompanies>((event, emit) async {
-      try {
-        if (!_isFullLoad) {
-          emit(const SearchBusinessLoading());
-          final result = await businessRepository.search(
-            event.searchModel,
-            offset: _indexLatestLoad,
-            limit: _limit,
-          );
-          if (result.isNotEmpty) {
-            _isFullLoad = _resultPaging(result.length) != 1;
-            _items.addAll(result);
-            emit(SearchBusinessSuccess(_items));
-          } else {
-            emit(const SearchBusinessEmpty(isFromServer: true));
-          }
-        }
-      } catch (e) {
-        emit(const SearchBusinessFailure());
-      }
-    });
   }
 
   int _resultPaging(int length) => length % _limit;

@@ -7,8 +7,8 @@ class CompanyModel extends Equatable {
   final String id;
   final String name;
   final String phone;
-  final String priceSymbol;
   final LocationModel locationModel;
+  final String? priceSymbol;
   final bool isClose;
   final double rating;
   final String? imageCoverCompany;
@@ -20,8 +20,8 @@ class CompanyModel extends Equatable {
     required this.id,
     required this.name,
     required this.phone,
-    required this.priceSymbol,
     required this.locationModel,
+    this.priceSymbol,
     this.isClose = true,
     this.rating = 0.0,
     this.imageCoverCompany,
