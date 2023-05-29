@@ -2,6 +2,7 @@ import 'package:bussy/injector/main_injector.dart';
 import 'package:bussy/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../domains/model/search_model.dart';
 import '../../presentations/search_business/search_business_bloc.dart';
@@ -55,6 +56,7 @@ class SearchCompaniesDelegate extends SearchDelegate {
               title: state.companies[index].name,
               subtitle: state.companies[index].locationModel.address ?? '',
               urlImage: state.companies[index].imageCoverCompany ?? '',
+              onTap: () => context.push('/detail/${state.companies[index].id}'),
             ),
           );
         }

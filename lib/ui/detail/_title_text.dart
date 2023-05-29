@@ -38,17 +38,29 @@ class _TitleTextWidget extends StatelessWidget {
             return Shimmer.fromColors(
               baseColor: Colors.grey,
               highlightColor: Colors.grey[300]!,
-              child: const Column(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 18.0,
-                    width: 50.0,
-                    child: ColoredBox(color: Colors.white),
+                    width: 150.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0),
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
                   SizedBox(
                     height: 16.0,
-                    width: 100.0,
-                    child: ColoredBox(color: Colors.white),
+                    width: 200.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0),
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -9,12 +9,6 @@ class _HeaderPicts extends StatelessWidget {
 
     return SliverAppBar(
       expandedHeight: sizeHeight,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.map),
-        ),
-      ],
       flexibleSpace: FlexibleSpaceBar(
         background: BlocBuilder<CompanyDetailCubit, CompanyDetailState>(
           builder: (context, state) {
