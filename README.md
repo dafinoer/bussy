@@ -22,6 +22,7 @@ A few resources to get you started if this is your first Flutter project:
 - [ ] List Review
 - [ ] Rating
 - [ ] Add Gmaps for location
+- [x] Clean Code(keep trying for decoupled code)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
